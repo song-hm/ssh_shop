@@ -1,8 +1,8 @@
 # 网上商城
-使用ssh(Struts2+Spring3+Hibernate3)框架，MVC三层结构实现的一个网上商城系统
+使用ssh(Struts2+Spring3+Hibernate3)框架，MVC 三层结构 实现的一个网上商城系统
 
-##1.1	前台需求分析:
-###1.1.1	用户模块:
+## 1.1	前台需求分析:
+### 1.1.1	用户模块:
 注册:
 1.前台JS校验:
 2.使用AJAX完成对用户名异步校验:
@@ -20,14 +20,14 @@
 2.用户名和密码都正确同时用户状态必须是激活状态:
 退出:
 1.销毁session:
-###1.1.2	一级分类模块:
+### 1.1.2	一级分类模块:
 查询一级分类:
 1.查询一级分类.
 * 将一级分类存入到session范围.(每个页面中都有一级分类的数据)
 查询某个一级分类:
 1.查询所有一级分类:
 * 同时查询到每个一级分类下所属的二级分类
-###1.1.3	商品模块:
+### 1.1.3	商品模块:
 查询热门商品:
 1.查询热门商品:(限制个数10个)
 查询最新商品:
@@ -38,14 +38,14 @@
 1.根据二级分类的ID进行查询商品:
 查询某个商品信息:
 1.根据商品ID进行查询商品:
-###1.1.4	购物模块:
+### 1.1.4	购物模块:
 添加到购物车:
 1.将商品信息添加到购物车中:
 从购物车中移除商品:
 1.将商品信息从购物车中移除:
 清空购物车:
 1.将所有的商品信息从购物车中移除:
-###1.1.5	订单模块:
+### 1.1.5	订单模块:
 生成订单:
 1.将购物车中的信息存入到数据库(生成订单).
 * 清空购物车:
@@ -57,8 +57,8 @@
 1.根据用户ID查询订单.
 查询某个订单详情:
 1.根据订单ID进行查询:
-##1.2	后台需求分析:
-###1.2.1	用户模块:
+## 1.2	后台需求分析:
+### 1.2.1	用户模块:
 添加用户:
 添加用户到数据库
 修改用户:
@@ -67,7 +67,7 @@
 删除用户
 查询用户:
 查询用户(带分页)
-###1.2.2	一级分类:
+### 1.2.2	一级分类:
 添加一级分类:
 添加一级分类:
 修改一级分类:
@@ -77,7 +77,7 @@
 * 级联删除二级分类:
 查询一级分类:
 查询一级分类:
-###1.2.3	二级分类:
+### 1.2.3	二级分类:
 添加二级分类:
 二级分类需要有所属一级分类:
 修改二级分类:
@@ -86,7 +86,7 @@
 删除二级分类:
 查询所有二级分类:
 查询二级分类(带分页)
-###1.2.4	商品模块:
+### 1.2.4	商品模块:
 添加商品:
 1.添加商品所属二级分类:
 2.上传商品图片:
@@ -97,13 +97,13 @@
 1.删除商品:
 查询商品:
 1.商品查询:(带分页)
-###1.2.5	订单模块:
+### 1.2.5	订单模块:
 查询订单:
 查询所有订单:(带分页)
 * 异步加载订单项:
-##1.3	页面设计:
+## 1.3	页面设计:
 使用静态页面就OK
-##1.4	数据库设计:
+## 1.4	数据库设计:
 用户表:
 * 用户ID
 * 用户名:
@@ -153,8 +153,8 @@
 后台用户表:
 * 用户名:
 * 密码:
-##1.5	编码实现:
-###1.5.1	搭建开发环境:
+## 1.5	编码实现:
+### 1.5.1	搭建开发环境:
 SSH整合:
 1.创建一个web工程:
 2.引入jar包和配置文件:
@@ -207,11 +207,7 @@ spring-test-3.2.0.RELEASE.jar
 * web.xml
  <!-- 配置Spring的核心监听器 -->
  <listener>
- 	<listener-
-
-class>org.springframework.web.context.ContextLoaderListener</listener-
-
-class>
+ 	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
  </listener>
  
  <context-param>
@@ -240,13 +236,9 @@ class>
 * 配置连接池:
 	<!-- 配置连接池: -->
 	<!-- 引入外部属性文件 -->
-	<context:property-placeholder 
-
-location="classpath:jdbc.properties"/>
+	<context:property-placeholder location="classpath:jdbc.properties"/>
 	<!-- 配置C3P0连接池: -->
-	<bean id="dataSource" 
-
-class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${jdbc.driver}"/>
 		<property name="jdbcUrl" value="${jdbc.url}"/>
 		<property name="user" value="${jdbc.user}"/>
@@ -255,43 +247,72 @@ class="com.mchange.v2.c3p0.ComboPooledDataSource">
 
 * Hibernate相关信息:
 	<!-- Hibernate的相关信息 -->
-	<bean id="sessionFactory" 
-
-class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<!-- 注入连接池 -->
 		<property name="dataSource" ref="dataSource"/>
 		<!-- 配置Hibernate的其他的属性 -->
 		<property name="hibernateProperties">
 			<props>
-				<prop 
-
-key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop 
-
-key="hibernate.format_sql">true</prop>
-				<prop 
-
-key="hibernate.connection.autocommit">false</prop>
-				<prop 
-
-key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
-		<!-- 配置Hibernate的映射文件 -->		
+		<!-- 配置Hibernate的映射文件 -->
+		
 	</bean>
 
 * 事务管理:
 	<!-- 事务管理: -->
 	<!-- 事务管理器 -->
-	<bean id="transactionManager" 
-class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>	
+	</bean>
+	
 	<!-- 开启注解事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
-##项目截图
+## 项目截图
 
-###商城首页
+### 商城首页
 ![首页](https://github.com/song-hm/ssh_shop/blob/master/pic/%E5%89%8D%E5%8F%B0%E9%A6%96%E9%A1%B5.png)
+
+### 注册
+![注册](https://github.com/song-hm/ssh_shop/blob/master/pic/%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2.png)
+
+### 登录
+![登录](https://github.com/song-hm/ssh_shop/blob/master/pic/%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png)
+
+### 商品列表页
+![商品列表](https://github.com/song-hm/ssh_shop/blob/master/pic/%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8%E9%A1%B5.png)
+
+### 商品详情页
+![商品详情](https://github.com/song-hm/ssh_shop/blob/master/pic/%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E9%A1%B5.png)
+
+### 购物车页面
+![购物车](https://github.com/song-hm/ssh_shop/blob/master/pic/%E8%B4%AD%E7%89%A9%E8%BD%A6%E9%A1%B5%E9%9D%A2.png)
+
+### 订单页
+![订单](https://github.com/song-hm/ssh_shop/blob/master/pic/%E8%AE%A2%E5%8D%95%E9%A1%B5%E9%9D%A2.png)
+
+
+### 我的订单
+![我的订单](https://github.com/song-hm/ssh_shop/blob/master/pic/%E6%88%91%E7%9A%84%E8%AE%A2%E5%8D%95%E9%A1%B5%E9%9D%A2.png)
+
+### 后台登录页面
+![后台登录页](https://github.com/song-hm/ssh_shop/blob/master/pic/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png)
+
+### 后台商城管理系统首页
+![后台首页](https://github.com/song-hm/ssh_shop/blob/master/pic/%E5%95%86%E5%9F%8E%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A6%96%E9%A1%B5.png)
+
+### 分类管理页面
+![分类](https://github.com/song-hm/ssh_shop/blob/master/pic/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86.png)
+
+### 订单管理
+![订单](https://github.com/song-hm/ssh_shop/blob/master/pic/%E8%AE%A2%E5%8D%95%E7%AE%A1%E7%90%86.png)
+
+### 商品管理
+![商品](https://github.com/song-hm/ssh_shop/blob/master/pic/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86.png)
+
